@@ -4,11 +4,12 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
 	public float speed = 4f;
-	public float angleFactor = 30.0f;
+	public float angleFactor = 10.0f;
 	float buttonPressTime = 0.0f;
 	Rigidbody2D rb;
 	int phase;
 	float angle;
+	GameObject Bar;
 
 	const int ANGLE_MODE = 0;
 	const int JUMP_MODE = 1;
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		phase = ANGLE_MODE;
 		angle = 0;
+		Bar = GameObject.Find ("DriveBar");
 	}
 
 	void Update(){
@@ -30,16 +32,21 @@ public class PlayerMovement : MonoBehaviour {
 			Debug.Log ("Tiempo de problemo: " + buttonPressTime);
 		}
 		if(Input.GetMouseButtonUp(0)){ // left click released
+
+			// Choose angle phase
 			if(phase == ANGLE_MODE){
 				angle = (buttonPressTime*angleFactor % 90) * Mathf.Deg2Rad;
-				phase = JUMP_MODE;
+				Bar.GetComponent< GUIBarScript > ().ScaleSize = 1;
+				Bar.GetComponent< GUIBarScript > ().DisplayText = true;
 			}
-			if(phase == JUMP_MODE){
 
-				rb.velocity = new Vector2( Mathf.Cos(angle) * buttonPressTime * speed, Mathf.Sin(angle) * buttonPressTime * speed);
-				phase = ANGLE_MODE;
+			//Choose jump speed phase
+			if(phase == JUMP_MODE){
+				rb.velocity = new Vector2( Mathf.Cos(angle) * buttonPressTime * speed, Mathf.Sin(angle) * buttonPressTime * speed * 2);
 			}
 			buttonPressTime = 0;
+			if(phase == ANGLE_MODE){ phase = JUMP_MODE; }
+			else{ phase = ANGLE_MODE; }
 		}
 	}
 }
