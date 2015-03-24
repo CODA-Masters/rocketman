@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	float speed = 4f;
-	float angleFactor = 10f;
+	public float speed = 4f;
+	public float angleFactor = 30.0f;
 	float buttonPressTime = 0.0f;
 	Rigidbody2D rb;
 	int phase;
