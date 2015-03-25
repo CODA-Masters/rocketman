@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
 			if(buttonPressTime >= jumpTop){
 				buttonPressTime = jumpTop;
 			}
-			float percent = buttonPressTime / 2;
+			float percent = buttonPressTime / jumpTop;
 			Bar.GetComponent < GUIBarScript > ().SetNewValue(percent);
 			Debug.Log ("Tiempo de problemo: " + buttonPressTime);
 		}
@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour {
 				angle = (buttonPressTime*angleFactor % 90) * Mathf.Deg2Rad;
 				Bar.GetComponent< GUIBarScript > ().ScaleSize = 1;
 				Bar.GetComponent< GUIBarScript > ().DisplayText = true;
+				Bar.GetComponent < GUIBarScript > ().SetNewValue(0);
 			}
 
 			//Choose jump speed phase
