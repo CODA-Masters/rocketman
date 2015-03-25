@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 	public float speed = 4f;
 	public float angleFactor = 10.0f;
 	float buttonPressTime = 0.0f;
+	float jumpTop = 2f;
 	Rigidbody2D rb;
 	int phase;
 	float angle;
@@ -29,6 +30,11 @@ public class PlayerMovement : MonoBehaviour {
 	void Movement(){
 		if(Input.GetMouseButton(0)){ // left click pressed
 			buttonPressTime += Time.deltaTime; // calculate time pressed
+			if(buttonPressTime >= jumpTop){
+				buttonPressTime = jumpTop;
+			}
+			float percent = buttonPressTime / 2;
+			Bar.GetComponent < GUIBarScript > ().SetNewValue(percent);
 			Debug.Log ("Tiempo de problemo: " + buttonPressTime);
 		}
 		if(Input.GetMouseButtonUp(0)){ // left click released
