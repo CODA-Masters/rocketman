@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour {
 	int phase;
 	float angle;
 	GameObject Bar;
+	GameObject Arc;
+	GameObject Arrow;
+	float angleSum;
 
 	const int ANGLE_MODE = 0;
 	const int JUMP_MODE = 1;
@@ -21,6 +24,8 @@ public class PlayerMovement : MonoBehaviour {
 		phase = ANGLE_MODE;
 		angle = 0;
 		Bar = GameObject.Find ("DriveBar");
+		Arc = GameObject.Find ("ArcImages");
+		Arrow = GameObject.Find ("arrow");
 	}
 
 	void Update(){
@@ -35,21 +40,35 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			float percent = buttonPressTime / jumpTop;
 			Bar.GetComponent < GUIBarScript > ().SetNewValue(percent);
-			Debug.Log ("Tiempo de problemo: " + buttonPressTime);
+			//Debug.Log ("Tiempo de problemo: " + buttonPressTime);
+
+			if(phase == ANGLE_MODE){
+				float angleDeg = buttonPressTime*angleFactor;
+				if(Arrow.transform.rotation.z <= 90){
+					angle = (buttonPressTime*angleFactor) * Mathf.Deg2Rad;
+					Arrow.transform.Rotate(0,0,angle);
+				}
+			} 
+			//Debug.Log("Angulillo", ""+Arrow.transform.rotation.z);
+
 		}
 		if(Input.GetMouseButtonUp(0)){ // left click released
 
-			// Choose angle phase
+			// Angle phase ends
 			if(phase == ANGLE_MODE){
-				angle = (buttonPressTime*angleFactor % 90) * Mathf.Deg2Rad;
 				Bar.GetComponent< GUIBarScript > ().ScaleSize = 1;
 				Bar.GetComponent< GUIBarScript > ().DisplayText = true;
 				Bar.GetComponent < GUIBarScript > ().SetNewValue(0);
+				Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
+				Arrow.transform.rotation = Quaternion.Euler(0,0,0);
 			}
 
-			//Choose jump speed phase
+			//Jump speed phase ends
 			if(phase == JUMP_MODE){
 				rb.velocity = new Vector2( Mathf.Cos(angle) * buttonPressTime * speed, Mathf.Sin(angle) * buttonPressTime * speed * 2);
+				Bar.GetComponent< GUIBarScript > ().ScaleSize = 0;
+				Bar.GetComponent< GUIBarScript > ().DisplayText = false;
+				Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
 			}
 			buttonPressTime = 0;
 			if(phase == ANGLE_MODE){ phase = JUMP_MODE; }
