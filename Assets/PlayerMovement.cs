@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject Bar;
 	GameObject Arc;
 	GameObject Arrow;
-	float angleSum;
+	Collider2D collider;
 
 	const int ANGLE_MODE = 0;
 	const int JUMP_MODE = 1;
@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour {
 		Bar = GameObject.Find ("DriveBar");
 		Arc = GameObject.Find ("ArcImages");
 		Arrow = GameObject.Find ("arrow");
+		collider = GetComponent<BoxCollider2D> ();
 	}
 
 	void Update(){
@@ -42,7 +43,6 @@ public class PlayerMovement : MonoBehaviour {
 			Bar.GetComponent < GUIBarScript > ().SetNewValue(percent);
 
 			if(phase == ANGLE_MODE){
-				float angleDeg = buttonPressTime*angleFactor;
 				if(Arrow.transform.eulerAngles.z <= 90){
 					angle = (buttonPressTime*angleFactor) * Mathf.Deg2Rad;
 					Arrow.transform.Rotate(0,0,angle);
@@ -73,5 +73,12 @@ public class PlayerMovement : MonoBehaviour {
 			if(phase == ANGLE_MODE){ phase = JUMP_MODE; }
 			else{ phase = ANGLE_MODE; }
 		}
+	}
+
+	void OnCollisionEnter2D(Collision2D collision){
+		Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
+	}
+	void OnCollisionExit2D(Collision2D collision){
+		Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
 	}
 }
