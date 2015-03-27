@@ -40,16 +40,14 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			float percent = buttonPressTime / jumpTop;
 			Bar.GetComponent < GUIBarScript > ().SetNewValue(percent);
-			//Debug.Log ("Tiempo de problemo: " + buttonPressTime);
 
 			if(phase == ANGLE_MODE){
 				float angleDeg = buttonPressTime*angleFactor;
-				if(Arrow.transform.rotation.z <= 90){
+				if(Arrow.transform.eulerAngles.z <= 90){
 					angle = (buttonPressTime*angleFactor) * Mathf.Deg2Rad;
 					Arrow.transform.Rotate(0,0,angle);
 				}
-			} 
-			//Debug.Log("Angulillo", ""+Arrow.transform.rotation.z);
+			}
 
 		}
 		if(Input.GetMouseButtonUp(0)){ // left click released
@@ -60,12 +58,13 @@ public class PlayerMovement : MonoBehaviour {
 				Bar.GetComponent< GUIBarScript > ().DisplayText = true;
 				Bar.GetComponent < GUIBarScript > ().SetNewValue(0);
 				Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
+				angle = Arrow.transform.eulerAngles.z * Mathf.Deg2Rad;
 				Arrow.transform.rotation = Quaternion.Euler(0,0,0);
 			}
 
 			//Jump speed phase ends
 			if(phase == JUMP_MODE){
-				rb.velocity = new Vector2( Mathf.Cos(angle) * buttonPressTime * speed, Mathf.Sin(angle) * buttonPressTime * speed * 2);
+				rb.velocity = new Vector2( Mathf.Cos(angle) * buttonPressTime * speed, Mathf.Sin(angle) * buttonPressTime * speed * 1.5f);
 				Bar.GetComponent< GUIBarScript > ().ScaleSize = 0;
 				Bar.GetComponent< GUIBarScript > ().DisplayText = false;
 				Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
