@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject Arc;
 	GameObject Arrow;
 	Collider2D collider;
+	bool isJumping;
 
 	const int ANGLE_MODE = 0;
 	const int JUMP_MODE = 1;
@@ -27,10 +28,12 @@ public class PlayerMovement : MonoBehaviour {
 		Arc = GameObject.Find ("ArcImages");
 		Arrow = GameObject.Find ("arrow");
 		collider = GetComponent<BoxCollider2D> ();
+		isJumping = false;
 	}
 
 	void Update(){
-		Movement ();
+		if(!isJumping)
+			Movement ();
 	}
 	
 	void Movement(){
@@ -77,8 +80,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){
 		Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
+		isJumping = false;
 	}
 	void OnCollisionExit2D(Collision2D collision){
 		Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
+		isJumping = true;
 	}
 }
