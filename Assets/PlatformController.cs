@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlatformController : MonoBehaviour {
 
-	public GameObject platform1, platform2, platform3, platform4; 
+	public GameObject platform1, platform2, platform3, platform4, player; 
 
 	public float MaxPlatformHeight;
 	
@@ -22,9 +22,12 @@ public class PlatformController : MonoBehaviour {
 		platform3 = GameObject.FindGameObjectWithTag ("Plataforma3");
 		platform4 = GameObject.FindGameObjectWithTag ("Plataforma4");
 
+		player = GameObject.FindGameObjectWithTag ("Player");
+
 		
 		RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
 		platform1.transform.Translate(0, RandomYDistance, 0);
+		player.transform.Translate (0, RandomYDistance, 0);
 
 		RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
 		platform2.transform.Translate(0, RandomYDistance, 0);
