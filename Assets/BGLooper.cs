@@ -14,7 +14,7 @@ public class BGLooper : MonoBehaviour {
 			pos.x += (widthOfBGObject * numPlatforms);
 		} else {
 			float widthOfBGObject = ((BoxCollider2D)collider).bounds.size.x;
-			pos.x += (widthOfBGObject * numBGPanels);
+			pos.x += (widthOfBGObject * numPlatforms);
 		}
 		collider.transform.position = pos;
 		//collider.attachedRigidbody.transform.position = pos;
