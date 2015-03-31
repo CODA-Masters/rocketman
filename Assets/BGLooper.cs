@@ -10,12 +10,13 @@ public class BGLooper : MonoBehaviour {
 
 		Vector3 pos = collider.transform.position;
 		if (collider.tag == "Platform") {
-			float widthOfBGObject = ((BoxCollider2D)collider).size.x*2f;
+			float widthOfBGObject = ((BoxCollider2D)collider).bounds.size.x;
 			pos.x += (widthOfBGObject * numPlatforms);
 		} else {
-			float widthOfBGObject = ((BoxCollider2D)collider).size.x*1.5f;
+			float widthOfBGObject = ((BoxCollider2D)collider).bounds.size.x;
 			pos.x += (widthOfBGObject * numBGPanels);
 		}
 		collider.transform.position = pos;
+		//collider.attachedRigidbody.transform.position = pos;
 	}
 }
