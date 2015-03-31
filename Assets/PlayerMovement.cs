@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject Arrow;
 	Collider2D collider;
 	bool isJumping;
+	GameObject fire;
 
 	const int ANGLE_MODE = 0;
 	const int JUMP_MODE = 1;
@@ -29,11 +30,17 @@ public class PlayerMovement : MonoBehaviour {
 		Arrow = GameObject.Find ("arrow");
 		collider = GetComponent<BoxCollider2D> ();
 		isJumping = false;
+		fire = GameObject.Find ("fire");
+		fire.GetComponent<ParticleSystem> ().Stop ();
 	}
 
 	void Update(){
-		if(!isJumping)
+		if (!isJumping) {
 			Movement ();
+			fire.GetComponent<ParticleSystem> ().Stop ();
+		} else {
+			fire.GetComponent<ParticleSystem> ().Play ();
+		}
 	}
 	
 	void Movement(){
