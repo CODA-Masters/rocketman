@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 namespace ProgressBar{
 
@@ -18,10 +19,19 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject Background;
 	GameObject fire;
 	GameObject RetryButton;
-	Collider2D collider;
+	GameObject FinalScorePanel;
+	GameObject ScorePanel;
 	bool isJumping;
 	bool dead;
-
+	float percent;
+	int score;
+	float posInicial;
+	GameObject platform;
+	GameObject sound_Jetpack;
+	GameObject sound_Die;
+	GameObject sound_Score;
+	GameObject sound_Power;
+	
 	const int ANGLE_MODE = 0;
 	const int JUMP_MODE = 1;
 
@@ -35,26 +45,47 @@ public class PlayerMovement : MonoBehaviour {
 		Background = GameObject.Find("outer-space1");
 		Arrow = GameObject.Find ("arrow");
 		RetryButton = GameObject.Find ("RetryButton");
-		collider = GetComponent<BoxCollider2D> ();
+		FinalScorePanel = GameObject.Find ("FinalScorePanel");
 		isJumping = false;
 		fire = GameObject.Find ("fire");
 		fire.GetComponent<ParticleSystem> ().Stop ();
 		dead = false;
+		percent = 0;
+		ScorePanel = GameObject.Find ("ScorePanel");
+		score = 0;
+		platform =  GameObject.FindGameObjectWithTag("Platform");
+		posInicial = transform.position.x;
+		sound_Jetpack = GameObject.Find ("sound_Jetpack");
+		sound_Die = GameObject.Find ("sound_Die");
+		sound_Score = GameObject.Find ("sound_Score");
+		sound_Power = GameObject.Find ("sound_Power");
+		
 	}
 
 	void Update(){
-		if (!isJumping) {
+		if (!isJumping)
 			Movement ();
-			fire.GetComponent<ParticleSystem> ().Stop ();
-		} else {
-			fire.GetComponent<ParticleSystem> ().Play ();
-		}
+
 		BoxCollider2D bc = Background.GetComponent<BoxCollider2D> ();
+		
+		// if DIE
 		if (transform.position.y < (Background.transform.position.y-bc.size.y)) {
+			if(!dead){
+				Time.timeScale = 0;
+				sound_Die.GetComponent<AudioSource>().Play();
+				sound_Jetpack.GetComponent<AudioSource>().Stop();
+				RetryButton.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
+				FinalScorePanel.GetComponentInChildren<Text>().text = "Your score: " + score;
+				FinalScorePanel.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
+			}
 			dead = true;
-			Time.timeScale = 0;
-			RetryButton.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 		}
+		int scorePrev = score;
+		score = (int)((transform.position.x - posInicial)/platform.GetComponent<BoxCollider2D>().bounds.size.x);
+		ScorePanel.GetComponentInChildren<Text> ().text = ""+score;
+		if(score > scorePrev)
+			sound_Score.GetComponent<AudioSource>().Play();
+		
 	}
 	
 	void Movement(){
@@ -63,10 +94,15 @@ public class PlayerMovement : MonoBehaviour {
 			if(buttonPressTime >= jumpTop){
 				buttonPressTime = jumpTop;
 			}
-			float percent = buttonPressTime / jumpTop;
-			Bar.GetComponent < RectTransform > ().localScale = new Vector3(1, 1, 1);
-			//Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(percent);
-			Bar.GetComponent<ProgressRadialBehaviour>().Value = percent * 100;
+			
+			if(phase == JUMP_MODE){
+				percent = buttonPressTime / jumpTop;
+				Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(percent);
+				if(!sound_Power.GetComponent<AudioSource>().isPlaying){
+					sound_Power.GetComponent<AudioSource>().Play();
+				}
+				
+			}
 
 			if(phase == ANGLE_MODE){
 				if(Arrow.transform.eulerAngles.z <= 90){
@@ -80,18 +116,17 @@ public class PlayerMovement : MonoBehaviour {
 
 			// Angle phase ends
 			if(phase == ANGLE_MODE){
-				//Bar.GetComponent < RectTransform > ().localScale = new Vector3(1, 1, 1);
-				//Bar.GetComponent < GUIBarScript > ().SetNewValue(0);
-				Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
+				Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(0);
 				angle = Arrow.transform.eulerAngles.z * Mathf.Deg2Rad;
-				Arrow.transform.rotation = Quaternion.Euler(0,0,0);
 			}
 
 			//Jump speed phase ends
 			if(phase == JUMP_MODE){
 				rb.velocity = new Vector2( Mathf.Cos(angle) * buttonPressTime * speed, Mathf.Sin(angle) * buttonPressTime * speed * 1.5f);
-				//Bar.GetComponent < RectTransform > ().localScale = new Vector3(0, 0, 0);
 				Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
+				Arrow.transform.rotation = Quaternion.Euler(0,0,0);
+				Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(0);
+				
 			}
 			buttonPressTime = 0;
 			if(phase == ANGLE_MODE){ phase = JUMP_MODE; }
@@ -102,10 +137,14 @@ public class PlayerMovement : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision){
 		Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
 		isJumping = false;
+		fire.GetComponent<ParticleSystem> ().Stop ();
+		sound_Jetpack.GetComponent<AudioSource>().Stop();
 	}
 	void OnCollisionExit2D(Collision2D collision){
 		Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
 		isJumping = true;
+		fire.GetComponent<ParticleSystem> ().Play ();
+		sound_Jetpack.GetComponent<AudioSource>().Play();
 	}
 }
 }
