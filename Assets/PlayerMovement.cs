@@ -13,9 +13,12 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject Bar;
 	GameObject Arc;
 	GameObject Arrow;
+	GameObject Background;
+	GameObject fire;
+	GameObject RetryButton;
 	Collider2D collider;
 	bool isJumping;
-	GameObject fire;
+	bool dead;
 
 	const int ANGLE_MODE = 0;
 	const int JUMP_MODE = 1;
@@ -27,11 +30,14 @@ public class PlayerMovement : MonoBehaviour {
 		angle = 0;
 		Bar = GameObject.Find ("DriveBar");
 		Arc = GameObject.Find ("ArcImages");
+		Background = GameObject.Find("outer-space1");
 		Arrow = GameObject.Find ("arrow");
+		RetryButton = GameObject.Find ("RetryButton");
 		collider = GetComponent<BoxCollider2D> ();
 		isJumping = false;
 		fire = GameObject.Find ("fire");
 		fire.GetComponent<ParticleSystem> ().Stop ();
+		dead = false;
 	}
 
 	void Update(){
@@ -40,6 +46,12 @@ public class PlayerMovement : MonoBehaviour {
 			fire.GetComponent<ParticleSystem> ().Stop ();
 		} else {
 			fire.GetComponent<ParticleSystem> ().Play ();
+		}
+		BoxCollider2D bc = Background.GetComponent<BoxCollider2D> ();
+		if (transform.position.y < (Background.transform.position.y-bc.size.y)) {
+			dead = true;
+			Time.timeScale = 0;
+			RetryButton.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 		}
 	}
 	
