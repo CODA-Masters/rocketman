@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+namespace ProgressBar{
+
 public class PlayerMovement : MonoBehaviour {
 
 	public float speed = 4f;
@@ -62,8 +64,9 @@ public class PlayerMovement : MonoBehaviour {
 				buttonPressTime = jumpTop;
 			}
 			float percent = buttonPressTime / jumpTop;
-			//Bar.GetComponent < RectTransform > ().localScale = new Vector3(1, 1, 1);
-			//Bar.GetComponent <  > ().SetNewValue(percent);
+			Bar.GetComponent < RectTransform > ().localScale = new Vector3(1, 1, 1);
+			//Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(percent);
+			Bar.GetComponent<ProgressRadialBehaviour>().Value = percent * 100;
 
 			if(phase == ANGLE_MODE){
 				if(Arrow.transform.eulerAngles.z <= 90){
@@ -104,4 +107,5 @@ public class PlayerMovement : MonoBehaviour {
 		Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
 		isJumping = true;
 	}
+}
 }
