@@ -7,7 +7,7 @@ namespace FMG
 
 		public void onClick()
 		{
-			Application.LoadLevel(Application.loadedLevel);
+			Application.LoadLevel(levelIndex);
 		}
 	}
 }

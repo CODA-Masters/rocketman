@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		phase = ANGLE_MODE;
 		angle = 0;
-		Bar = GameObject.Find ("DriveBar");
+		Bar = GameObject.Find ("PowerBar");
 		Arc = GameObject.Find ("ArcImages");
 		Background = GameObject.Find("outer-space1");
 		Arrow = GameObject.Find ("arrow");
@@ -62,7 +62,8 @@ public class PlayerMovement : MonoBehaviour {
 				buttonPressTime = jumpTop;
 			}
 			float percent = buttonPressTime / jumpTop;
-			Bar.GetComponent < GUIBarScript > ().SetNewValue(percent);
+			//Bar.GetComponent < RectTransform > ().localScale = new Vector3(1, 1, 1);
+			//Bar.GetComponent <  > ().SetNewValue(percent);
 
 			if(phase == ANGLE_MODE){
 				if(Arrow.transform.eulerAngles.z <= 90){
@@ -76,9 +77,8 @@ public class PlayerMovement : MonoBehaviour {
 
 			// Angle phase ends
 			if(phase == ANGLE_MODE){
-				Bar.GetComponent< GUIBarScript > ().ScaleSize = 1;
-				Bar.GetComponent< GUIBarScript > ().DisplayText = true;
-				Bar.GetComponent < GUIBarScript > ().SetNewValue(0);
+				//Bar.GetComponent < RectTransform > ().localScale = new Vector3(1, 1, 1);
+				//Bar.GetComponent < GUIBarScript > ().SetNewValue(0);
 				Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
 				angle = Arrow.transform.eulerAngles.z * Mathf.Deg2Rad;
 				Arrow.transform.rotation = Quaternion.Euler(0,0,0);
@@ -87,8 +87,7 @@ public class PlayerMovement : MonoBehaviour {
 			//Jump speed phase ends
 			if(phase == JUMP_MODE){
 				rb.velocity = new Vector2( Mathf.Cos(angle) * buttonPressTime * speed, Mathf.Sin(angle) * buttonPressTime * speed * 1.5f);
-				Bar.GetComponent< GUIBarScript > ().ScaleSize = 0;
-				Bar.GetComponent< GUIBarScript > ().DisplayText = false;
+				//Bar.GetComponent < RectTransform > ().localScale = new Vector3(0, 0, 0);
 				Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
 			}
 			buttonPressTime = 0;

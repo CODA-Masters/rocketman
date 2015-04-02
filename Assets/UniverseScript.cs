@@ -8,10 +8,9 @@ public class UniverseScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Time.timeScale = 1;
-		Bar = GameObject.Find ("DriveBar");
+		Bar = GameObject.Find ("PowerBar");
 		RetryButton = GameObject.Find ("RetryButton");
-		Bar.GetComponent< GUIBarScript > ().ScaleSize = 0;
-		Bar.GetComponent< GUIBarScript > ().DisplayText = false;
+		//Bar.GetComponent< RectTransform > ().localScale = new Vector3 (0, 0, 0);
 		RetryButton.GetComponent<RectTransform> ().localScale = new Vector3 (0, 0, 0);
 	}
 	
