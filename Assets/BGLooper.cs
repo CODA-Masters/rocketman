@@ -4,7 +4,7 @@ using System.Collections;
 public class BGLooper : MonoBehaviour {
 	
 	int numBGPanels = 4;
-	int numPlatforms = 8;
+	int numPlatforms = 10;
 	private float RandomYDistance; 
 	public float MaxPlatformHeight;
 	public float MinPlatformHeight;
@@ -15,7 +15,7 @@ public class BGLooper : MonoBehaviour {
 		Vector3 pos = collider.transform.position;
 		float widthOfBGObject = 0;
 		if (collider.tag == "Platform") {
-			widthOfBGObject = ((BoxCollider2D)collider).size.x*2f;
+			widthOfBGObject = ((BoxCollider2D)collider).size.x*1.6f;
 			pos.x += (widthOfBGObject * numPlatforms);
 			RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
 			collider.transform.Translate(0, RandomYDistance, 0);

@@ -6,10 +6,10 @@ namespace ProgressBar{
 
 public class PlayerMovement : MonoBehaviour {
 
-	public float speed = 4f;
-	public float angleFactor = 10.0f;
+	public float speed = 5f;
+	public float angleFactor = 40.0f;
 	float buttonPressTime = 0.0f;
-	float jumpTop = 2f;
+	public float jumpTop = 1.5f;
 	Rigidbody2D rb;
 	int phase;
 	float angle;
@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour {
 
 			//Jump speed phase ends
 			if(phase == JUMP_MODE){
-				rb.velocity = new Vector2( Mathf.Cos(angle) * buttonPressTime * speed, Mathf.Sin(angle) * buttonPressTime * speed * 1.5f);
+				rb.velocity = new Vector2( Mathf.Cos(angle) + buttonPressTime * speed, Mathf.Sin(angle) + buttonPressTime * speed * 1.5f);
 				Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
 				Arrow.transform.rotation = Quaternion.Euler(0,0,0);
 				Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(0);
