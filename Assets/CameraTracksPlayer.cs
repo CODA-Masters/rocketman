@@ -16,6 +16,7 @@ public class CameraTracksPlayer : MonoBehaviour {
 			Debug.LogError("Couldn't find an object with tag 'Player'");
 			return;
 		}
+	
 
 		player = player_go.transform;
 

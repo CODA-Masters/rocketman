@@ -139,6 +139,8 @@ public class PlayerMovement : MonoBehaviour {
 		isJumping = false;
 		fire.GetComponent<ParticleSystem> ().Stop ();
 		sound_Jetpack.GetComponent<AudioSource>().Stop();
+				
+
 	}
 	void OnCollisionExit2D(Collision2D collision){
 		Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
