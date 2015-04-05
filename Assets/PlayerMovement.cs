@@ -6,7 +6,7 @@ namespace ProgressBar{
 
 public class PlayerMovement : MonoBehaviour {
 
-	public float speed = 5f;
+	public float speed = 10f;
 	public float angleFactor = 40.0f;
 	float buttonPressTime = 0.0f;
 	public float jumpTop = 1.5f;
@@ -39,11 +39,12 @@ public class PlayerMovement : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 		phase = ANGLE_MODE;
-		angle = 0;
+		angle = 15;
 		Bar = GameObject.Find ("PowerBar");
 		Arc = GameObject.Find ("ArcImages");
 		Background = GameObject.Find("outer-space1");
 		Arrow = GameObject.Find ("arrow");
+		Arrow.transform.localRotation = Quaternion.Euler (0, 0, angle);
 		RetryButton = GameObject.Find ("RetryButton");
 		FinalScorePanel = GameObject.Find ("FinalScorePanel");
 		isJumping = false;
@@ -105,9 +106,9 @@ public class PlayerMovement : MonoBehaviour {
 			}
 
 			if(phase == ANGLE_MODE){
-				if(Arrow.transform.eulerAngles.z <= 90){
-					angle = (buttonPressTime*angleFactor) * Mathf.Deg2Rad;
-					Arrow.transform.Rotate(0,0,angle);
+				if(Arrow.transform.localRotation.z <= 90){
+					angle = 15f+(buttonPressTime*angleFactor);
+					Arrow.transform.localRotation = Quaternion.Euler (0, 0, angle);
 				}
 			}
 
@@ -122,9 +123,9 @@ public class PlayerMovement : MonoBehaviour {
 
 			//Jump speed phase ends
 			if(phase == JUMP_MODE){
-				rb.velocity = new Vector2( Mathf.Cos(angle) + buttonPressTime * speed, Mathf.Sin(angle) + buttonPressTime * speed * 1.5f);
+				rb.velocity = new Vector2( Mathf.Cos(angle) * buttonPressTime * speed, Mathf.Sin(angle) * buttonPressTime * speed * 1.5f);
 				Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
-				Arrow.transform.rotation = Quaternion.Euler(0,0,0);
+				Arrow.transform.rotation = Quaternion.Euler(0,0,15f);
 				Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(0);
 				
 			}
