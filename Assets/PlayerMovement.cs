@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour {
 		ScorePanel = GameObject.Find ("ScorePanel");
 		score = 0;
 		platform =  GameObject.FindGameObjectWithTag("Platform");
-		posInicial = transform.position.x;
+		posInicial = transform.position.x - platform.GetComponent<BoxCollider2D>().bounds.size.x;
 		sound_Jetpack = GameObject.Find ("sound_Jetpack");
 		sound_Die = GameObject.Find ("sound_Die");
 		sound_Score = GameObject.Find ("sound_Score");
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour {
 			dead = true;
 		}
 		int scorePrev = score;
-		score = (int)((transform.position.x - posInicial)/platform.GetComponent<BoxCollider2D>().bounds.size.x);
+		score = (int)((transform.position.x - posInicial-2)/platform.GetComponent<BoxCollider2D>().bounds.size.x);
 		ScorePanel.GetComponentInChildren<Text> ().text = ""+score;
 		if(score > scorePrev)
 			sound_Score.GetComponent<AudioSource>().Play();
