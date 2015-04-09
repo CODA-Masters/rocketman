@@ -3,56 +3,54 @@ using System.Collections;
 
 public class PlatformController : MonoBehaviour {
 
-	public GameObject platform1, platform2, platform3, platform4, platform5, platform6, platform7, platform8, player; 
+	private GameObject player;
+	private GameObject[] platforms;
 
 	public float MaxPlatformHeight;
 	
 	public float MinPlatformHeight;
+	
+	private float gemYPosition;
 
-	private float RandomYDistance; 
+	private float RandomYDistance;
+	
+	private int hasGem;
 	
 	// Use this for initialization
 	
 	void Start () 
 		
 	{
-
-		platform1 = GameObject.Find("platform1");
-		platform2 = GameObject.Find("platform2");
-		platform3 = GameObject.Find("platform3");
-		platform4 = GameObject.Find("platform4");
-		platform5 = GameObject.Find("platform5");
-		platform6 = GameObject.Find("platform6");
-		platform7 = GameObject.Find("platform7");
-		platform8 = GameObject.Find("platform8");
+		platforms = new GameObject[10];
+		for (int i = 0; i < 10; i++){
+			GameObject platform = GameObject.Find ("platform"+(i+1));
+			platforms[i] = platform;
+		}
+			
 
 		player = GameObject.FindGameObjectWithTag ("Player");
-
 		
-		RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
-		platform1.transform.Translate(0, RandomYDistance, 0);
-		player.transform.Translate (0, RandomYDistance, 0);
+		
+		for(int i = 0; i < platforms.Length; i++){
 
-		RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
-		platform2.transform.Translate(0, RandomYDistance, 0);
 
-		RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
-		platform3.transform.Translate(0, RandomYDistance, 0);
-
-		RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
-		platform4.transform.Translate(0, RandomYDistance, 0);
-
-		RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
-		platform5.transform.Translate(0, RandomYDistance, 0);	
-
-		RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
-		platform6.transform.Translate(0, RandomYDistance, 0);	
-
-		RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
-		platform7.transform.Translate(0, RandomYDistance, 0);	
-
-		RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
-		platform8.transform.Translate(0, RandomYDistance, 0);	
+			RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
+			if(i == 0){
+				player.transform.Translate (0, RandomYDistance, 0);
+			}
+			
+			platforms[i].transform.Translate(0, RandomYDistance, 0);
+			
+			hasGem = Random.Range(0,2);
+			if(hasGem == 0){
+				platforms[i].GetComponentInChildren<PolygonCollider2D>().transform.localScale = new Vector3 (0, 0, 0);
+			}
+			
+			if(i != 0){
+				gemYPosition = (platforms[i].transform.position.y + platforms[i-1].transform.position.y)/ 2;
+				//platforms[i].transform.FindChild("spaceGem").transform.position=new Vector2(brozo);
+			}
+		}
 		
 	}
 
