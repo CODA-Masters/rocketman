@@ -47,8 +47,10 @@ public class PlatformController : MonoBehaviour {
 			}
 			
 			if(i != 0){
-				gemYPosition = (platforms[i].transform.position.y + platforms[i-1].transform.position.y)/ 2;
-				//platforms[i].transform.FindChild("spaceGem").transform.position=new Vector2(brozo);
+				gemYPosition = Mathf.Abs(platforms[i].transform.position.y - platforms[i-1].transform.position.y);
+				Vector3 pos = platforms[i].transform.FindChild("spaceGem").transform.position;
+				pos.y = gemYPosition;
+				platforms[i].transform.FindChild("spaceGem").transform.position = pos;
 			}
 		}
 		

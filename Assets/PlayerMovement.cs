@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject ScorePanel;
 	bool isJumping;
 	bool dead;
+	bool startJumping;
 	float percent;
 	int score;
 	float posInicial;
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject sound_Die;
 	GameObject sound_Score;
 	GameObject sound_Power;
+	BoxCollider2D bc;
 	
 	const int ANGLE_MODE = 0;
 	const int JUMP_MODE = 1;
@@ -60,35 +62,11 @@ public class PlayerMovement : MonoBehaviour {
 		sound_Die = GameObject.Find ("sound_Die");
 		sound_Score = GameObject.Find ("sound_Score");
 		sound_Power = GameObject.Find ("sound_Power");
+		bool startJumping = false;
+		bc = Background.GetComponent<BoxCollider2D> ();
 		
 	}
 
-	void Update(){
-		if (!isJumping)
-			Movement ();
-
-		BoxCollider2D bc = Background.GetComponent<BoxCollider2D> ();
-		
-		// if DIE
-		if (transform.position.y < (Background.transform.position.y-bc.size.y)) {
-			if(!dead){
-				Time.timeScale = 0;
-				sound_Die.GetComponent<AudioSource>().Play();
-				sound_Jetpack.GetComponent<AudioSource>().Stop();
-				RetryButton.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
-				FinalScorePanel.GetComponentInChildren<Text>().text = "Your score: " + score;
-				FinalScorePanel.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
-			}
-			dead = true;
-		}
-		int scorePrev = score;
-		score = (int)((transform.position.x - posInicial+2)/platform.GetComponent<BoxCollider2D>().bounds.size.x);
-		ScorePanel.GetComponentInChildren<Text> ().text = ""+score;
-		if(score > scorePrev)
-			sound_Score.GetComponent<AudioSource>().Play();
-		
-	}
-	
 	void Movement(){
 		if(Input.GetMouseButton(0)){ // left click pressed
 			buttonPressTime += Time.deltaTime; // calculate time pressed
@@ -104,35 +82,77 @@ public class PlayerMovement : MonoBehaviour {
 				}
 				
 			}
-
+			
 			if(phase == ANGLE_MODE){
 				if(Arrow.transform.localRotation.z <= 90){
 					angle = 15f+(buttonPressTime*angleFactor);
 					Arrow.transform.localRotation = Quaternion.Euler (0, 0, angle);
 				}
 			}
-
+			
 		}
 		if(Input.GetMouseButtonUp(0)){ // left click released
-
-			// Angle phase ends
-			if(phase == ANGLE_MODE){
-				Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(0);
-				angle = Arrow.transform.eulerAngles.z * Mathf.Deg2Rad;
-			}
-
-			//Jump speed phase ends
-			if(phase == JUMP_MODE){
-				rb.velocity = new Vector2( Mathf.Cos(angle) * buttonPressTime * speed, Mathf.Sin(angle) * buttonPressTime * speed * 1.5f);
-				Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
-				Arrow.transform.rotation = Quaternion.Euler(0,0,15f);
-				Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(0);
+			
+			
+			if(!startJumping){
+				// Angle phase ends
+				if(phase == ANGLE_MODE){
+					Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(0);
+					angle = Arrow.transform.eulerAngles.z * Mathf.Deg2Rad;
+					buttonPressTime = 0;
+				}
 				
+				//Jump speed phase ends
+				if(phase == JUMP_MODE){
+					startJumping = true;
+					Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
+					Arrow.transform.rotation = Quaternion.Euler(0,0,15f);
+					Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(0);
+					
+				}
+				
+				
+				if(phase == ANGLE_MODE){ phase = JUMP_MODE; }
+				else{ phase = ANGLE_MODE; }
 			}
-			buttonPressTime = 0;
-			if(phase == ANGLE_MODE){ phase = JUMP_MODE; }
-			else{ phase = ANGLE_MODE; }
 		}
+	}
+
+	// Graficos y movimiento
+	void Update(){
+		if (!isJumping)
+			Movement ();
+	}
+	
+	// Calculos fisicos
+	void FixedUpdate(){
+		
+		// if DIE
+		if (transform.position.y < (Background.transform.position.y - bc.size.y)) {
+			if (!dead) {
+				Time.timeScale = 0;
+				sound_Die.GetComponent<AudioSource> ().Play ();
+				sound_Jetpack.GetComponent<AudioSource> ().Stop ();
+				RetryButton.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
+				FinalScorePanel.GetComponentInChildren<Text> ().text = "Your score: " + score;
+				FinalScorePanel.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
+			}
+			dead = true;
+		}
+		if (!isJumping) {
+			if (startJumping) {
+				Debug.Log (buttonPressTime);
+				rb.velocity = new Vector2 (Mathf.Cos (angle) * buttonPressTime * speed, Mathf.Sin (angle) * buttonPressTime * speed * 1.5f);
+				startJumping = false;
+				buttonPressTime = 0;
+			}
+			
+		}
+		int scorePrev = score;
+		score = (int)((transform.position.x - posInicial + 2) / platform.GetComponent<BoxCollider2D> ().bounds.size.x);
+		ScorePanel.GetComponentInChildren<Text> ().text = "" + score;
+		if (score > scorePrev)
+			sound_Score.GetComponent<AudioSource> ().Play ();
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
@@ -140,9 +160,9 @@ public class PlayerMovement : MonoBehaviour {
 		isJumping = false;
 		fire.GetComponent<ParticleSystem> ().Stop ();
 		sound_Jetpack.GetComponent<AudioSource>().Stop();
-				
-
+		rb.velocity = new Vector3 (0, 0, 0);
 	}
+
 	void OnCollisionExit2D(Collision2D collision){
 		Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
 		isJumping = true;
