@@ -38,8 +38,8 @@ public class PlatformController : MonoBehaviour {
 			if(i == 0){
 				player.transform.Translate (0, RandomYDistance, 0);
 			}
-			
-			platforms[i].transform.Translate(0, RandomYDistance, 0);
+			if(i != 4)
+				platforms[i].transform.Translate(0, RandomYDistance, 0);
 			
 			hasGem = Random.Range(0,2);
 			if(hasGem == 0){

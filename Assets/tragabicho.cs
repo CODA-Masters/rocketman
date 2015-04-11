@@ -4,7 +4,8 @@ using System.Collections;
 public class tragabicho : MonoBehaviour {
 
 	GameObject Player;
-	GameObject BlackHoleDest;
+	GameObject BlackHoleDestGood;
+	GameObject BlackHoleDestBad;
 	GameObject BallTransformation;
 	GameObject fire;
 	bool contact = false;
@@ -12,9 +13,11 @@ public class tragabicho : MonoBehaviour {
 	void Start(){
 		Player = GameObject.FindGameObjectWithTag("Player");
 		BallTransformation = GameObject.Find ("BallTransformation");
-		BlackHoleDest = GameObject.Find ("BlackHoleDest");
+		BlackHoleDestGood = GameObject.Find ("BlackHoleDestGood");
+		BlackHoleDestBad = GameObject.Find ("BlackHoleDestBad");
 		fire = GameObject.Find ("fire");
-		BlackHoleDest.GetComponentInChildren<ParticleSystem> ().Stop ();
+		BlackHoleDestGood.GetComponentInChildren<ParticleSystem> ().Stop ();
+		BlackHoleDestBad.GetComponentInChildren<ParticleSystem> ().Stop ();
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider){
@@ -37,13 +40,13 @@ public class tragabicho : MonoBehaviour {
 
 				if (this.name == "BlackHoleGood") {
 					Player.transform.Translate(Vector3.right * Time.deltaTime*5);
-					BlackHoleDest.GetComponentInChildren<ParticleSystem> ().Play ();
+					BlackHoleDestGood.GetComponentInChildren<ParticleSystem> ().Play ();
 
-					if(Player.transform.position.x >= BlackHoleDest.transform.position.x){
+					if(Player.transform.position.x >= BlackHoleDestGood.transform.position.x){
 						Player.GetComponent<Rigidbody2D>().isKinematic = false;
 						Player.GetComponent<Rigidbody2D>().gravityScale = 1;
-						Player.transform.position = BlackHoleDest.transform.position;
-						BlackHoleDest.GetComponentInChildren<ParticleSystem> ().Stop ();
+						Player.transform.position = BlackHoleDestGood.transform.position;
+						BlackHoleDestGood.GetComponentInChildren<ParticleSystem> ().Stop ();
 						Player.transform.localScale = new Vector3(0.4f,0.4f,0.4f);
 						BallTransformation.GetComponent<ParticleSystem>().Stop();
 						contact = false;
@@ -52,13 +55,13 @@ public class tragabicho : MonoBehaviour {
 
 				else if (this.name == "BlackHoleBad") {
 					Player.transform.Translate(Vector3.left * Time.deltaTime*5);
-					BlackHoleDest.GetComponentInChildren<ParticleSystem> ().Play ();
+					BlackHoleDestGood.GetComponentInChildren<ParticleSystem> ().Play ();
 
-					if(Player.transform.position.x <= BlackHoleDest.transform.position.x){
+					if(Player.transform.position.x <= BlackHoleDestBad.transform.position.x){
 						Player.GetComponent<Rigidbody2D>().isKinematic = false;
 						Player.GetComponent<Rigidbody2D>().gravityScale = 1;
-						Player.transform.position = BlackHoleDest.transform.position;
-						BlackHoleDest.GetComponentInChildren<ParticleSystem> ().Stop ();
+						Player.transform.position = BlackHoleDestBad.transform.position;
+						BlackHoleDestBad.GetComponentInChildren<ParticleSystem> ().Stop ();
 						Player.transform.localScale = new Vector3(0.4f,0.4f,0.4f);
 						BallTransformation.GetComponent<ParticleSystem>().Stop();
 						contact = false;
