@@ -19,8 +19,10 @@ public class BGLooper : MonoBehaviour {
 			// Mover plataforma en con eje Y aleatorio
 			widthOfBGObject = ((BoxCollider2D)collider).size.x*1.6f;
 			pos.x += (widthOfBGObject * numPlatforms);
-			RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
-			collider.transform.Translate(0, RandomYDistance, 0);
+			if(collider.name != "platform5"){
+				RandomYDistance = Random.Range(MinPlatformHeight, MaxPlatformHeight);
+				collider.transform.Translate(0, RandomYDistance, 0);
+			}
 			
 			// Aparecer o no gema
 			hasGem = Random.Range(0,2);

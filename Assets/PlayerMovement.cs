@@ -141,7 +141,6 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (!isJumping) {
 			if (startJumping) {
-				Debug.Log (buttonPressTime);
 				rb.velocity = new Vector2 (Mathf.Cos (angle) * buttonPressTime * speed, Mathf.Sin (angle) * buttonPressTime * speed * 1.5f);
 				startJumping = false;
 				buttonPressTime = 0;
