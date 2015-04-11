@@ -41,7 +41,7 @@ public class UniverseScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		bg_music = GameObject.Find ("bg_music");
+
 	}
 	
 	// Update is called once per frame
