@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject Arrow;
 	GameObject Background;
 	GameObject fire;
-	GameObject RetryButton;
+	GameObject RetryButton, MenuButton;
 	GameObject FinalScorePanel;
 	GameObject ScorePanel;
 	bool isJumping;
@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour {
 		Arrow = GameObject.Find ("arrow");
 		Arrow.transform.localRotation = Quaternion.Euler (0, 0, angle);
 		RetryButton = GameObject.Find ("RetryButton");
+		MenuButton = GameObject.Find ("MenuButton");
 		FinalScorePanel = GameObject.Find ("FinalScorePanel");
 		isJumping = false;
 		fire = GameObject.Find ("fire");
@@ -134,6 +135,7 @@ public class PlayerMovement : MonoBehaviour {
 				sound_Die.GetComponent<AudioSource> ().Play ();
 				sound_Jetpack.GetComponent<AudioSource> ().Stop ();
 				RetryButton.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
+				MenuButton.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 				FinalScorePanel.GetComponentInChildren<Text> ().text = "Your score: " + score;
 				FinalScorePanel.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 			}

@@ -79,7 +79,7 @@ namespace FMG
 			}
 			K_BUTTON_PRESS -= Time.deltaTime;
 
-			if(Input.GetButtonDown("SelectButton"))
+			if(Input.GetMouseButtonDown(0))
 			{
 				if(K_BUTTON_PRESS<=0)
 				{

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UniverseScript : MonoBehaviour {
 	GameObject Bar;
-	GameObject RetryButton;
+	GameObject RetryButton, MenuButton;
 	GameObject FinalScorePanel;
 	GameObject bg_music;
 	GameObject Sounds;
@@ -26,7 +26,9 @@ public class UniverseScript : MonoBehaviour {
 		// Inicialization
 		GemsUI = GameObject.Find("GemsUI");
 		RetryButton = GameObject.Find ("RetryButton");
+		MenuButton = GameObject.Find ("MenuButton");
 		RetryButton.GetComponent<RectTransform> ().localScale = new Vector3 (0, 0, 0);
+		MenuButton.GetComponent<RectTransform> ().localScale = new Vector3 (0, 0, 0);
 		FinalScorePanel = GameObject.Find ("FinalScorePanel");
 		FinalScorePanel.GetComponent<RectTransform> ().localScale = new Vector3 (0, 0, 0);
 		gems = 0;
@@ -48,9 +50,11 @@ public class UniverseScript : MonoBehaviour {
 	void Update () {
 		if (GemsUI == null){
 			GemsUI = GameObject.Find("GemsUI");
+		}
+		
+		if(GemsUI != null){
 			GemsUI.GetComponentInChildren<Text>().text = gems+"";
 		}
-		GemsUI.GetComponentInChildren<Text>().text = gems+"";
 	}
 	
 	public void addGem(){
