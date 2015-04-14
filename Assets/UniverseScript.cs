@@ -36,7 +36,7 @@ public class UniverseScript : MonoBehaviour {
 		bg_music = GameObject.Find ("bg_music");
 		DontDestroyOnLoad (Sounds);
 		DontDestroyOnLoad (bg_music);
-		if (! bg_music.GetComponent<AudioSource> ().isPlaying) {
+		if (! bg_music.GetComponent<AudioSource> ().isPlaying && FMG.Constants.getAudioVolume()==1) {
 			bg_music.GetComponent<AudioSource> ().Play();
 		}
 	}

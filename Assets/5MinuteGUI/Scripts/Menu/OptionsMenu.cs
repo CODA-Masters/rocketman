@@ -54,8 +54,10 @@ namespace FMG
 				if(currentVol==0)
 				{
 					Constants.setAudioVolume(1);
+					AudioListener.volume = 1;
 				}else{
 					Constants.setAudioVolume(0);
+					AudioListener.volume = 0;
 				}
 				AudioVolume[] audioVolumes = (AudioVolume[])GameObject.FindObjectsOfType(typeof(AudioVolume));
 				for(int i=0; i<audioVolumes.Length; i++)

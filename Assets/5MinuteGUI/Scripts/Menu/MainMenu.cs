@@ -29,6 +29,7 @@ namespace FMG
 		{
 			if(str.Equals("LevelSelect"))
 			{
+				/*
 				Debug.Log ("LevelSelect");
 				if(useLevelSelect)
 				{
@@ -36,6 +37,8 @@ namespace FMG
 				}else{
 					Application.LoadLevel(1);
 				}
+				*/
+				Application.LoadLevel(1);
 			}
 
 			if(str.Equals("LevelSelectBack"))

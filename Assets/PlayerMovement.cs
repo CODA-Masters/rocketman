@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour {
 			if(phase == JUMP_MODE){
 				percent = buttonPressTime / jumpTop;
 				Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(percent);
-				if(!sound_Power.GetComponent<AudioSource>().isPlaying){
+				if(!sound_Power.GetComponent<AudioSource>().isPlaying && FMG.Constants.getAudioVolume()==1){
 					sound_Power.GetComponent<AudioSource>().Play();
 				}
 				
@@ -132,7 +132,8 @@ public class PlayerMovement : MonoBehaviour {
 		if (transform.position.y < (Background.transform.position.y - bc.size.y)) {
 			if (!dead) {
 				Time.timeScale = 0;
-				sound_Die.GetComponent<AudioSource> ().Play ();
+				if(FMG.Constants.getAudioVolume()==1)
+					sound_Die.GetComponent<AudioSource> ().Play ();
 				sound_Jetpack.GetComponent<AudioSource> ().Stop ();
 				RetryButton.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 				MenuButton.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
@@ -152,7 +153,7 @@ public class PlayerMovement : MonoBehaviour {
 		int scorePrev = score;
 		score = (int)((transform.position.x - posInicial + 2) / platform.GetComponent<BoxCollider2D> ().bounds.size.x);
 		ScorePanel.GetComponentInChildren<Text> ().text = "" + score;
-		if (score > scorePrev)
+		if (score > scorePrev && FMG.Constants.getAudioVolume()==1)
 			sound_Score.GetComponent<AudioSource> ().Play ();
 	}
 
@@ -168,7 +169,8 @@ public class PlayerMovement : MonoBehaviour {
 		Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
 		isJumping = true;
 		fire.GetComponent<ParticleSystem> ().Play ();
-		sound_Jetpack.GetComponent<AudioSource>().Play();
+		if(FMG.Constants.getAudioVolume()==1)
+			sound_Jetpack.GetComponent<AudioSource>().Play();
 	}
 }
 }
