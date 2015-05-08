@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
 	Rigidbody2D rb;
 	int phase;
 	float angle;
+	float timeCounter;
 	GameObject Bar;
 	GameObject Arc;
 	GameObject Arrow;
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
 	bool isJumping;
 	bool dead;
 	bool startJumping;
+	bool topAngleReached;
 	float percent;
 	int score;
 	float posInicial;
@@ -64,7 +66,9 @@ public class PlayerMovement : MonoBehaviour {
 		sound_Score = GameObject.Find ("sound_Score");
 		sound_Power = GameObject.Find ("sound_Power");
 		bool startJumping = false;
+		topAngleReached = false;
 		bc = Background.GetComponent<BoxCollider2D> ();
+		timeCounter = 0;
 		
 	}
 
@@ -85,15 +89,33 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			
 			if(phase == ANGLE_MODE){
-				if(Arrow.transform.localRotation.z <= 90){
-					angle = 15f+(buttonPressTime*angleFactor);
-					Arrow.transform.localRotation = Quaternion.Euler (0, 0, angle);
+				Vector2 v = Input.mousePosition - Arrow.transform.position;
+				if(angle <= 100 && angle >= 5 && !topAngleReached){
+					angle = Mathf.Atan2(v.y,v.x)*Mathf.Rad2Deg;
 				}
+				else{
+					topAngleReached  = true;
+					timeCounter += Time.deltaTime;
+					if(angle > 100)
+						angle = 90;
+					if(angle < 5)
+						angle = 15;
+				}
+				if(topAngleReached){
+					if(timeCounter > 0.3f){
+						timeCounter = 0;
+						topAngleReached = false;
+					}
+				}
+				Arrow.transform.localRotation = Quaternion.Euler (0, 0, angle);
+				Debug.Log(angle);
 			}
 			
 		}
 		if(Input.GetMouseButtonUp(0)){ // left click released
 			
+			timeCounter = 0;
+			topAngleReached = false;
 			
 			if(!startJumping){
 				// Angle phase ends
