@@ -108,7 +108,6 @@ public class PlayerMovement : MonoBehaviour {
 					}
 				}
 				Arrow.transform.localRotation = Quaternion.Euler (0, 0, angle);
-				Debug.Log(angle);
 			}
 			
 		}
