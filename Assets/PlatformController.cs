@@ -17,7 +17,7 @@ public class PlatformController : MonoBehaviour {
 	private float RandomYDistance;
 	private float RandomXDistance;
 	
-	private int hasGem;
+	private int hasGem, hasBlackHole;
 	
 	// Use this for initialization
 	
@@ -55,6 +55,24 @@ public class PlatformController : MonoBehaviour {
 			pos.y = gemYPosition;
 			platforms[i].transform.FindChild("spaceGem").transform.position = pos;
 
+		}
+
+		// Aparecer o no agujero negro
+		hasBlackHole = Random.Range(0,2);
+		if(hasBlackHole == 0){
+			platforms[0].transform.GetChild(4).gameObject.SetActive(false);
+		}
+		else{
+			platforms[0].transform.GetChild(4).gameObject.SetActive(true);
+		}
+
+		// Aparecer o no agujero negro
+		hasBlackHole = Random.Range(0,2);
+		if(hasBlackHole == 0){
+			platforms[9].transform.GetChild(3).gameObject.SetActive(false);
+		}
+		else{
+			platforms[9].transform.GetChild(3).gameObject.SetActive(true);
 		}
 		
 	}

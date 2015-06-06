@@ -10,6 +10,8 @@ public class purchaseSkin : MonoBehaviour {
 	const int GOLD_PRICE = 500;
 	const int PURPLE_PRICE = 100;
 
+	Rect windowRect;
+
 	string getPrevItem(){
 		string result = "";
 		
@@ -59,6 +61,7 @@ public class purchaseSkin : MonoBehaviour {
 				PlayerPrefs.SetInt("gems",gems);
 				PlayerPrefs.SetInt("redUnlocked",1);
 				GameObject.Find ("myGems").GetComponentInChildren<Text> ().text = gems+"";
+				Application.LoadLevel(2);
 			}
 			else if (redUnlocked == 1){
 
@@ -75,6 +78,7 @@ public class purchaseSkin : MonoBehaviour {
 				PlayerPrefs.SetInt("gems",gems);
 				PlayerPrefs.SetInt("goldUnlocked",1);
 				GameObject.Find ("myGems").GetComponentInChildren<Text> ().text = gems+"";
+				Application.LoadLevel(2);
 			}
 			else if (goldUnlocked == 1){
 
@@ -91,6 +95,7 @@ public class purchaseSkin : MonoBehaviour {
 				PlayerPrefs.SetInt("gems",gems);
 				PlayerPrefs.SetInt("purpleUnlocked",1);
 				GameObject.Find ("myGems").GetComponentInChildren<Text> ().text = gems+"";
+				Application.LoadLevel(2);
 			}
 			else if (purpleUnlocked == 1){
 
@@ -107,6 +112,7 @@ public class purchaseSkin : MonoBehaviour {
 				PlayerPrefs.SetInt("gems",gems);
 				PlayerPrefs.SetInt("blueUnlocked",1);
 				GameObject.Find ("myGems").GetComponentInChildren<Text> ().text = gems+"";
+				Application.LoadLevel(2);
 			}
 			else if (blueUnlocked == 1){
 

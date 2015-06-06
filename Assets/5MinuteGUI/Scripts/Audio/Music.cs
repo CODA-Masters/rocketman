@@ -27,6 +27,8 @@ namespace FMG {
 					K_AUDIO.Play();
 				}
 			}
+			if(!K_MUSIC.GetComponent<AudioSource>().isPlaying)
+				K_MUSIC.GetComponent<AudioSource> ().Play ();
 		}
 		
 		void createMusic()

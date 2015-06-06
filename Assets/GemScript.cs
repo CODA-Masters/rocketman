@@ -12,6 +12,7 @@ public class GemScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collider){
 		universe.GetComponent<UniverseScript>().addGem();
 		transform.localScale = new Vector3 (0, 0, 0);
+		GameObject.Find ("Pickup_Gem").GetComponent<AudioSource> ().Play ();
 	}
 	
 }

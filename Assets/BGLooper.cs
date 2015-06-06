@@ -7,7 +7,7 @@ public class BGLooper : MonoBehaviour {
 	int numPlatforms = 10;
 	private float RandomYDistance;
 	private float RandomXDistance;
-	private int hasGem;
+	private int hasGem, hasBlackHole;
 
 	public float MaxPlatformY;
 	public float MinPlatformY;
@@ -41,7 +41,7 @@ public class BGLooper : MonoBehaviour {
 			if(hasGem == 0 && collider.name!="platform10"){
 				collider.GetComponentInChildren<PolygonCollider2D>().transform.localScale = new Vector3 (0, 0, 0);
 			}
-			else if (hasGem==1){
+			else if (hasGem==1 && collider.name!="platform10"){
 				collider.GetComponentInChildren<PolygonCollider2D>().transform.localScale = new Vector3 (1, 1, 1);
 			}
 
@@ -55,6 +55,22 @@ public class BGLooper : MonoBehaviour {
 				Vector3 pos2 = collider.transform.FindChild("spaceGem").transform.position;
 				pos2.y = gemYPosition;
 				collider.transform.FindChild("spaceGem").transform.position = pos2;
+			}
+
+			// Aparecer o no agujero negro
+			hasBlackHole = Random.Range(0,2);
+			if(hasBlackHole == 0 && (collider.name=="platform1")){
+				collider.transform.GetChild(4).gameObject.SetActive(false);
+			}
+			else if (hasBlackHole == 1 && (collider.name=="platform1")){
+				collider.transform.GetChild(4).gameObject.SetActive(true);
+			}
+
+			else if(hasBlackHole == 0 && (collider.name=="platform10")){
+				collider.transform.GetChild(3).gameObject.SetActive(false);
+			}
+			else if (hasBlackHole == 1 && (collider.name=="platform10")){
+				collider.transform.GetChild(3).gameObject.SetActive(true);
 			}
 			
 		} else if (collider.tag == "Background"){

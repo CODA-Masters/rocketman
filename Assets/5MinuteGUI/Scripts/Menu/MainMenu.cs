@@ -23,6 +23,8 @@ namespace FMG
 			{
 				exitButton.SetActive(false);
 			}
+
+			PlayerPrefs.SetInt ("watched_tutorial", 0);
 		}
 
 		public void onCommand(string str)

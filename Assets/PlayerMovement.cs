@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject Background;
 	GameObject fire;
 	GameObject RetryButton, MenuButton;
-	GameObject FinalScorePanel;
+	GameObject FinalScorePanel, HighScorePanel;
 	GameObject ScorePanel;
 	bool isJumping;
 	bool dead;
@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour {
 		RetryButton = GameObject.Find ("RetryButton");
 		MenuButton = GameObject.Find ("MenuButton");
 		FinalScorePanel = GameObject.Find ("FinalScorePanel");
+		HighScorePanel = GameObject.Find ("HighScorePanel");
 		isJumping = false;
 		fire = GameObject.Find ("fire");
 		fire.GetComponent<ParticleSystem> ().Stop ();
@@ -198,6 +199,8 @@ public class PlayerMovement : MonoBehaviour {
 				MenuButton.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 				FinalScorePanel.GetComponentInChildren<Text> ().text = "Your score: " + score;
 				FinalScorePanel.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
+				HighScorePanel.GetComponentInChildren<Text> ().text = "High score: " + PlayerPrefs.GetInt("highscore");
+				HighScorePanel.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1);
 			}
 			dead = true;
 		}
@@ -211,6 +214,8 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		int scorePrev = score;
 		score = (int)((transform.position.x - posInicial + 2) / platform.GetComponent<BoxCollider2D> ().bounds.size.x);
+		if (score > PlayerPrefs.GetInt ("highscore"))
+			PlayerPrefs.SetInt ("highscore", score);
 		ScorePanel.GetComponentInChildren<Text> ().text = "" + score;
 		if (score > scorePrev && FMG.Constants.getAudioVolume()==1)
 			sound_Score.GetComponent<AudioSource> ().Play ();
