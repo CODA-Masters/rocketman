@@ -1,0 +1,352 @@
+fileFormatVersion: 2
+guid: ffda00ff76063e649a66ee21e2dbf6c5
+timeCreated: 1433536564
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: droid_from_android_red_0
+    21300002: droid_from_android_red_1
+    21300004: droid_from_android_red_2
+    21300006: droid_from_android_red_3
+    21300008: droid_from_android_red_4
+    21300010: droid_from_android_red_5
+    21300012: droid_from_android_red_6
+    21300014: droid_from_android_red_7
+    21300016: droid_from_android_red_8
+    21300018: droid_from_android_red_9
+    21300020: droid_from_android_red_10
+    21300022: droid_from_android_red_11
+    21300024: droid_from_android_red_12
+    21300026: droid_from_android_red_13
+    21300028: droid_from_android_red_14
+    21300030: droid_from_android_red_15
+    21300032: droid_from_android_red_16
+    21300034: droid_from_android_red_17
+    21300036: droid_from_android_red_18
+    21300038: droid_from_android_red_19
+    21300040: droid_from_android_red_20
+    21300042: droid_from_android_red_21
+    21300044: droid_from_android_red_22
+    21300046: droid_from_android_red_23
+    21300048: droid_from_android_red_24
+    21300050: droid_from_android_red_25
+    21300052: droid_from_android_red_26
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: droid_from_android_red_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 641
+        width: 42
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_1
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 641
+        width: 42
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_2
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 641
+        width: 42
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_3
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 561
+        width: 51
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_4
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 561
+        width: 51
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_5
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 561
+        width: 51
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_6
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 480
+        width: 44
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_7
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 482
+        width: 47
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_8
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 480
+        width: 44
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_9
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 401
+        width: 44
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_10
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 402
+        width: 50
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_11
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 402
+        width: 52
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_12
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 321
+        width: 51
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_13
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 321
+        width: 45
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_14
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 321
+        width: 42
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_15
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 241
+        width: 45
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_16
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 241
+        width: 45
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_17
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 241
+        width: 53
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_18
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 162
+        width: 53
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_19
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 165
+        width: 45
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_20
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 161
+        width: 42
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_21
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 81
+        width: 43
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_22
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 85
+        width: 43
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_23
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 82
+        width: 52
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_24
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1
+        width: 45
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_25
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 1
+        width: 43
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: droid_from_android_red_26
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 1
+        width: 47
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

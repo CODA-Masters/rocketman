@@ -10,6 +10,8 @@ public class UniverseScript : MonoBehaviour {
 	GameObject Sounds;
 	GameObject GemsUI;
 	GameObject HUDCanvas;
+	GameObject Player;
+	GameObject Animator;
 	public int gems;
 	private static UniverseScript _instance;
 
@@ -31,7 +33,7 @@ public class UniverseScript : MonoBehaviour {
 		MenuButton.GetComponent<RectTransform> ().localScale = new Vector3 (0, 0, 0);
 		FinalScorePanel = GameObject.Find ("FinalScorePanel");
 		FinalScorePanel.GetComponent<RectTransform> ().localScale = new Vector3 (0, 0, 0);
-		gems = 0;
+		gems = PlayerPrefs.GetInt("gems");
 		Sounds = GameObject.Find ("Sounds");
 		bg_music = GameObject.Find ("bg_music");
 		DontDestroyOnLoad (Sounds);
@@ -59,8 +61,9 @@ public class UniverseScript : MonoBehaviour {
 	
 	public void addGem(){
 		gems++;
+		PlayerPrefs.SetInt ("gems", gems);
 	}
 	public int getGems(){
-		return gems;
+		return PlayerPrefs.GetInt("gems");
 	}
 }

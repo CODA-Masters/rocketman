@@ -8,9 +8,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	public float speed = 10f;
 	public float angleFactor = 40.0f;
-	float buttonPressTime = 0.0f;
+	private float buttonPressTime = 0.0f;
 	public float jumpTop = 1.5f;
-	Rigidbody2D rb;
+	private Rigidbody2D rb;
+	private Animator animator;
 	int phase;
 	float angle;
 	float timeCounter;
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
 		phase = ANGLE_MODE;
 		angle = 15;
 		Bar = GameObject.Find ("PowerBar");
@@ -142,8 +144,44 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Graficos y movimiento
 	void Update(){
-		if (!isJumping)
+		if (!isJumping) {
 			Movement ();
+			switch (PlayerPrefs.GetInt ("selectedItem")) {
+				case 0:
+					animator.SetInteger ("state", 0);
+					break;
+				case 1:
+					animator.SetInteger ("state", 8);
+					break;
+				case 2:
+					animator.SetInteger ("state", 4);
+					break;
+				case 3:
+					animator.SetInteger ("state", 6);
+					break;
+				case 4:
+					animator.SetInteger("state",2);
+					break;
+			}
+		} else {
+			switch (PlayerPrefs.GetInt("selectedItem")){
+				case 0:
+					animator.SetInteger ("state", 1);
+					break;
+				case 1:
+					animator.SetInteger ("state", 9);
+					break;
+				case 2:
+					animator.SetInteger ("state", 5);
+					break;
+				case 3:
+					animator.SetInteger ("state", 7);
+					break;
+				case 4:
+					animator.SetInteger("state",3);
+					break;
+			}
+		}
 	}
 	
 	// Calculos fisicos

@@ -58,7 +58,8 @@ public class tragabicho : MonoBehaviour {
 					Player.GetComponent<Rigidbody2D>().gravityScale = 1;
 					Player.transform.position = BlackHoleDestGood.transform.position;
 					BlackHoleDestGood.GetComponentInChildren<ParticleSystem> ().Stop ();
-					Player.transform.localScale = new Vector3(0.4f,0.4f,0.4f);
+					Player.transform.rotation = Quaternion.AngleAxis(0,Vector3.forward);
+					Player.transform.localScale = new Vector3(2,2,1);
 					BallTransformation.GetComponent<ParticleSystem>().Stop();
 					contact = false;
 					timer = 0.0f;
@@ -80,7 +81,8 @@ public class tragabicho : MonoBehaviour {
 					Player.GetComponent<Rigidbody2D>().gravityScale = 1;
 					Player.transform.position = BlackHoleDestBad.transform.position;
 					BlackHoleDestBad.GetComponentInChildren<ParticleSystem> ().Stop ();
-					Player.transform.localScale = new Vector3(0.4f,0.4f,0.4f);
+					Player.transform.rotation = Quaternion.AngleAxis(0,Vector3.forward);
+					Player.transform.localScale = new Vector3(2,2,1);
 					BallTransformation.GetComponent<ParticleSystem>().Stop();
 					contact = false;
 					timer = 0.0f;

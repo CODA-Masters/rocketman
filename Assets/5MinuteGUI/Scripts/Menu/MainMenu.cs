@@ -29,15 +29,6 @@ namespace FMG
 		{
 			if(str.Equals("LevelSelect"))
 			{
-				/*
-				Debug.Log ("LevelSelect");
-				if(useLevelSelect)
-				{
-					Constants.fadeInFadeOut(levelSelectMenu,mainMenu);
-				}else{
-					Application.LoadLevel(1);
-				}
-				*/
 				Application.LoadLevel(1);
 			}
 
@@ -71,6 +62,15 @@ namespace FMG
 				Constants.fadeInFadeOut(optionsMenu,mainMenu);
 			}
 
+			if(str.Equals("Store"))
+			{
+				Application.LoadLevel(2);
+			}
+
+			if(str.Equals("Menu"))
+			{
+				Application.LoadLevel(0);
+			}
 
 		}
 	}
