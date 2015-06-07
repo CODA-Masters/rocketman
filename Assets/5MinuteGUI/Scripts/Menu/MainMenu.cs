@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 
 namespace FMG
@@ -25,6 +27,16 @@ namespace FMG
 			}
 
 			PlayerPrefs.SetInt ("watched_tutorial", 0);
+
+			// recommended for debugging:
+			PlayGamesPlatform.DebugLogEnabled = true;
+			// Activate the Google Play Games platform
+			PlayGamesPlatform.Activate();
+		}
+
+		public void Start(){
+			((PlayGamesPlatform)Social.Active).Authenticate ((bool success) => {}, true);
+			Social.localUser.Authenticate((bool success) => {});
 		}
 
 		public void onCommand(string str)
@@ -72,6 +84,21 @@ namespace FMG
 			if(str.Equals("Menu"))
 			{
 				Application.LoadLevel(0);
+			}
+
+			if (str.Equals ("Ranking")) {
+				if(Social.localUser.authenticated){
+					((PlayGamesPlatform)Social.Active).ShowLeaderboardUI("CgkIh-a8y9sQEAIQAA");
+				} else {
+					Social.localUser.Authenticate((bool success) => {});
+				}
+			}
+			if (str.Equals ("Achievements")) {
+				if(Social.localUser.authenticated){
+					((PlayGamesPlatform)Social.Active).ShowAchievementsUI();
+				} else {
+					Social.localUser.Authenticate((bool success) => {});
+				}
 			}
 
 		}

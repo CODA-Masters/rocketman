@@ -47,7 +47,7 @@ public class shopScript : MonoBehaviour {
 
 		if (redUnlocked == 1) {
 			Vector3 pos = GameObject.Find ("RedDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Text> ().rectTransform.position;
-			pos.x = GameObject.Find ("RedDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.position.x + 35;
+			pos.x = GameObject.Find ("RedDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.position.x * 1.75f;
 
 			GameObject.Find ("RedDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Text> ().rectTransform.position = pos;
 			GameObject.Find ("RedDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.localScale = new Vector3 (0, 0, 0);
@@ -58,7 +58,7 @@ public class shopScript : MonoBehaviour {
 
 		if (blueUnlocked == 1) {
 			Vector3 pos = GameObject.Find ("BlueDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Text> ().rectTransform.position;
-			pos.x = GameObject.Find ("BlueDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.position.x + 35;
+			pos.x = GameObject.Find ("BlueDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.position.x * 1.75f;
 			
 			GameObject.Find ("BlueDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Text> ().rectTransform.position = pos;
 			GameObject.Find ("BlueDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.localScale = new Vector3 (0, 0, 0);
@@ -69,7 +69,7 @@ public class shopScript : MonoBehaviour {
 
 		if (purpleUnlocked == 1) {
 			Vector3 pos = GameObject.Find ("PurpleDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Text> ().rectTransform.position;
-			pos.x = GameObject.Find ("PurpleDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.position.x + 35;
+			pos.x = GameObject.Find ("PurpleDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.position.x * 1.75f;
 			
 			GameObject.Find ("PurpleDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Text> ().rectTransform.position = pos;
 			GameObject.Find ("PurpleDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.localScale = new Vector3 (0, 0, 0);
@@ -80,7 +80,7 @@ public class shopScript : MonoBehaviour {
 
 		if (goldUnlocked == 1) {
 			Vector3 pos = GameObject.Find ("GoldDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Text> ().rectTransform.position;
-			pos.x = GameObject.Find ("GoldDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.position.x + 35;
+			pos.x = GameObject.Find ("GoldDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.position.x * 1.75f;
 			
 			GameObject.Find ("GoldDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Text> ().rectTransform.position = pos;
 			GameObject.Find ("GoldDroidButton").transform.FindChild ("Gem").GetComponentInChildren<Image> ().rectTransform.localScale = new Vector3 (0, 0, 0);

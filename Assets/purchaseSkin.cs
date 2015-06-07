@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public class purchaseSkin : MonoBehaviour {
 	public int item;
@@ -61,6 +63,7 @@ public class purchaseSkin : MonoBehaviour {
 				PlayerPrefs.SetInt("gems",gems);
 				PlayerPrefs.SetInt("redUnlocked",1);
 				GameObject.Find ("myGems").GetComponentInChildren<Text> ().text = gems+"";
+				Social.ReportProgress("CgkIh-a8y9sQEAIQAw", 100.0f, (bool success) => {});
 				Application.LoadLevel(2);
 			}
 			else if (redUnlocked == 1){
@@ -78,6 +81,7 @@ public class purchaseSkin : MonoBehaviour {
 				PlayerPrefs.SetInt("gems",gems);
 				PlayerPrefs.SetInt("goldUnlocked",1);
 				GameObject.Find ("myGems").GetComponentInChildren<Text> ().text = gems+"";
+				Social.ReportProgress("CgkIh-a8y9sQEAIQBQ", 100.0f, (bool success) => {});
 				Application.LoadLevel(2);
 			}
 			else if (goldUnlocked == 1){
@@ -95,6 +99,7 @@ public class purchaseSkin : MonoBehaviour {
 				PlayerPrefs.SetInt("gems",gems);
 				PlayerPrefs.SetInt("purpleUnlocked",1);
 				GameObject.Find ("myGems").GetComponentInChildren<Text> ().text = gems+"";
+				Social.ReportProgress("CgkIh-a8y9sQEAIQBA", 100.0f, (bool success) => {});
 				Application.LoadLevel(2);
 			}
 			else if (purpleUnlocked == 1){
@@ -112,6 +117,7 @@ public class purchaseSkin : MonoBehaviour {
 				PlayerPrefs.SetInt("gems",gems);
 				PlayerPrefs.SetInt("blueUnlocked",1);
 				GameObject.Find ("myGems").GetComponentInChildren<Text> ().text = gems+"";
+				Social.ReportProgress("CgkIh-a8y9sQEAIQAg", 100.0f, (bool success) => {});
 				Application.LoadLevel(2);
 			}
 			else if (blueUnlocked == 1){

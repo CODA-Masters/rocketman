@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 namespace ProgressBar{
 
@@ -192,6 +194,14 @@ public class PlayerMovement : MonoBehaviour {
 		if (transform.position.y < (Background.transform.position.y - bc.size.y)) {
 			if (!dead) {
 				Time.timeScale = 0;
+				if (score > PlayerPrefs.GetInt ("highscore")) {
+					PlayerPrefs.SetInt ("highscore", score);
+					if(Social.localUser.authenticated){
+						Social.ReportScore(score, "CgkIh-a8y9sQEAIQAA", (bool success) => {});
+					} else {
+						Social.localUser.Authenticate((bool success) => {});
+					}
+				}
 				if(FMG.Constants.getAudioVolume()==1)
 					sound_Die.GetComponent<AudioSource> ().Play ();
 				sound_Jetpack.GetComponent<AudioSource> ().Stop ();
@@ -214,11 +224,19 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		int scorePrev = score;
 		score = (int)((transform.position.x - posInicial + 2) / platform.GetComponent<BoxCollider2D> ().bounds.size.x);
-		if (score > PlayerPrefs.GetInt ("highscore"))
-			PlayerPrefs.SetInt ("highscore", score);
 		ScorePanel.GetComponentInChildren<Text> ().text = "" + score;
 		if (score > scorePrev && FMG.Constants.getAudioVolume()==1)
 			sound_Score.GetComponent<AudioSource> ().Play ();
+		
+		if (score == 10) {
+			Social.ReportProgress ("CgkIh-a8y9sQEAIQCQ", 100.0f, (bool success) => {});
+		} else if (score == 25) {
+			Social.ReportProgress ("CgkIh-a8y9sQEAIQBg", 100.0f, (bool success) => {});
+		} else if (score == 50) {
+			Social.ReportProgress ("CgkIh-a8y9sQEAIQBw", 100.0f, (bool success) => {});
+		} else if (score == 100) {
+			Social.ReportProgress ("CgkIh-a8y9sQEAIQCA", 100.0f, (bool success) => {});
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
