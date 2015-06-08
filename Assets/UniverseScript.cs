@@ -17,8 +17,8 @@ public class UniverseScript : MonoBehaviour {
 	private static UniverseScript _instance;
 
 	void Awake(){
-		//PlayerPrefs.SetInt ("gems", 100);
 		//PlayerPrefs.DeleteAll ();
+		//PlayerPrefs.SetInt ("gems", 100);
 		AudioSource[] allAudioSources = (AudioSource[])FindObjectsOfType(typeof(AudioSource));
 		for (int i = 0; i < allAudioSources.Length; i++) {
 			if(allAudioSources[i].name != "bg_music")
@@ -61,7 +61,6 @@ public class UniverseScript : MonoBehaviour {
 			OKButton.transform.localScale = new Vector3 (0, 0, 0);
 		}
 
-		gems = PlayerPrefs.GetInt("gems");
 		Sounds = GameObject.Find ("Sounds");
 		bg_music = GameObject.Find ("bg_music");
 		DontDestroyOnLoad (Sounds);
@@ -73,11 +72,11 @@ public class UniverseScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		gems = PlayerPrefs.GetInt("gems");
 		if (GemsUI == null){
 			GemsUI = GameObject.Find("GemsUI");
 		}
