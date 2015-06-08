@@ -17,7 +17,7 @@ public class UniverseScript : MonoBehaviour {
 	private static UniverseScript _instance;
 
 	void Awake(){
-		//PlayerPrefs.SetInt ("gems", 1000);
+		//PlayerPrefs.SetInt ("gems", 100);
 		//PlayerPrefs.DeleteAll ();
 		AudioSource[] allAudioSources = (AudioSource[])FindObjectsOfType(typeof(AudioSource));
 		for (int i = 0; i < allAudioSources.Length; i++) {
