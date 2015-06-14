@@ -41,6 +41,7 @@ namespace FMG {
 					K_AUDIO = K_MUSIC.AddComponent<AudioSource>();
 					K_AUDIO.loop = true;
 					 K_MUSIC.AddComponent<AudioVolume>();
+					K_MUSIC.GetComponent<AudioSource>().volume = 0.30f;
 				}
 				DontDestroyOnLoad(K_MUSIC);
 			}

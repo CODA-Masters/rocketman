@@ -14,10 +14,14 @@ namespace FMG
 
 		public string audioOn = "On";
 
+		public GameObject exp1, exp2, exp3, exp4;
+		public GameObject buttonNext, buttonBack;
+
 		public void Awake()
 		{
 			graphicsText.text = graphicsPrefix + QualitySettings.names[QualitySettings.GetQualityLevel()];
 			updateAudioText();
+			buttonBack.transform.localScale = new Vector3(0,0,0);
 		}
 
 		void updateAudioText()
@@ -66,6 +70,26 @@ namespace FMG
 				}
 
 				updateAudioText();
+			}
+
+			if(str.Equals("HelpNext"))
+			{
+				exp3.SetActive(true);
+				exp4.SetActive(true);
+				buttonBack.transform.localScale = new Vector3(1,1,1);
+				exp1.SetActive(false);
+				exp2.SetActive(false);
+				buttonNext.transform.localScale = new Vector3(0,0,0);
+			}
+
+			if(str.Equals("HelpBack"))
+			{
+				exp1.SetActive(true);
+				exp2.SetActive(true);
+				buttonNext.transform.localScale = new Vector3(1,1,1);
+				exp3.SetActive(false);
+				exp4.SetActive(false);
+				buttonBack.transform.localScale = new Vector3(0,0,0);
 			}
 		}
 	}

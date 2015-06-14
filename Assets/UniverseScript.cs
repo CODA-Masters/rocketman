@@ -10,7 +10,6 @@ public class UniverseScript : MonoBehaviour {
 	GameObject Sounds;
 	GameObject GemsUI;
 	GameObject HUDCanvas;
-	GameObject Player;
 	GameObject Animator;
 	GameObject Panel1, Panel2, OKButton;
 	public int gems;

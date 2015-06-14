@@ -11,13 +11,15 @@ namespace FMG
 		public GameObject mainMenu;
 		public GameObject levelSelectMenu;
 		public GameObject optionsMenu;
+		public GameObject helpMenu;
 		public GameObject creditsMenu;
 
 		public bool useLevelSelect = true;
 		public bool useExitButton = true;
 
 		public GameObject exitButton;
-
+		public GameObject progressBar;
+		AsyncOperation async;
 
 		public void Awake()
 		{
@@ -35,6 +37,8 @@ namespace FMG
 		}
 
 		public void Start(){
+			if(progressBar != null)
+				progressBar.SetActive (false);
 			((PlayGamesPlatform)Social.Active).Authenticate ((bool success) => {}, true);
 			Social.localUser.Authenticate((bool success) => {});
 		}
@@ -43,7 +47,7 @@ namespace FMG
 		{
 			if(str.Equals("LevelSelect"))
 			{
-				Application.LoadLevel(1);
+				async = Application.LoadLevelAsync(1);
 			}
 
 			if(str.Equals("LevelSelectBack"))
@@ -101,6 +105,24 @@ namespace FMG
 				}
 			}
 
+			if (str.Equals ("Help")) {
+				Constants.fadeInFadeOut(helpMenu,mainMenu);
+			}
+
+			if(str.Equals("HelpBack"))
+			{
+				Constants.fadeInFadeOut(mainMenu,helpMenu);
+				
+			}
+
+		}
+
+		public void Update(){
+			if (async != null) {
+				mainMenu.SetActive(false);
+				progressBar.SetActive(true);
+				progressBar.GetComponent<Slider>().value = async.progress;
+			}
 		}
 	}
 }
