@@ -2,11 +2,12 @@
 using System.Collections;
 using UnityEngine.UI;
 
+// Script que usa la escena de la tienda
 public class shopScript : MonoBehaviour {
 
 	int gems, redUnlocked, blueUnlocked, purpleUnlocked, goldUnlocked, selectedItem;
 
-
+	// Obtenemos el item a partir del codigo asociado
 	string getPrevItem(){
 		string result = "";
 		
@@ -31,9 +32,8 @@ public class shopScript : MonoBehaviour {
 		return result;
 	}
 
-	// Use this for initialization
+	// Al iniciar la escena comprobamos que esta desbloqueado y que elemento tenemos seleccionado
 	void Start () {
-		//PlayerPrefs.SetInt ("gems", 1000);
 
 		redUnlocked = PlayerPrefs.GetInt ("redUnlocked");
 		blueUnlocked = PlayerPrefs.GetInt ("blueUnlocked");

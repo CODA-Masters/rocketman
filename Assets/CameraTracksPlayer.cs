@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Este script lo usa la camara para seguir al jugador cuando se mueve
 public class CameraTracksPlayer : MonoBehaviour {
 
 	Transform player;
@@ -27,6 +28,7 @@ public class CameraTracksPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (player != null) {
+			// La camara se situa en una posicion relativa al jugador
 			Vector3 pos = transform.position;
 			pos.x = player.position.x + offsetX;
 			transform.position = pos;

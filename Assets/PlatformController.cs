@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Script que inicializa las plataformas en su posicion aleatoria
 public class PlatformController : MonoBehaviour {
 
 	private GameObject player;
@@ -26,6 +27,9 @@ public class PlatformController : MonoBehaviour {
 	{
 		player = GameObject.FindGameObjectWithTag ("Player");
 
+		/* Metemos las plataformas en un array para ordenarlas y le asignamos una
+		posicion aleatoria */
+		
 		platforms = new GameObject[10];
 		for (int i = 0; i < 10; i++){
 			GameObject platform = GameObject.Find ("platform"+(i+1));
@@ -41,7 +45,8 @@ public class PlatformController : MonoBehaviour {
 				platforms[i].transform.Translate(RandomXDistance, RandomYDistance, 0);
 		}
 		
-		
+		// Despues calculamos si tienen gema o agujero negro de forma aleatoria
+		// Se calcula tambien la altura de la gema con respecto a las plataformas
 		for(int i = 0; i < platforms.Length-1; i++){
 
 			hasGem = Random.Range(0,2);

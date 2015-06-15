@@ -4,9 +4,12 @@ using UnityEngine.UI;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
 
+// Script que se ejecuta al realizar una compra en la tienda
 public class purchaseSkin : MonoBehaviour {
 	public int item;
 	int redUnlocked, blueUnlocked, purpleUnlocked, goldUnlocked, gems, selectedItem;
+	
+	// Fijamos el precio de cada item con las siguientes constantes:
 	const int RED_PRICE = 50;
 	const int BLUE_PRICE = 15;
 	const int GOLD_PRICE = 500;
@@ -17,6 +20,7 @@ public class purchaseSkin : MonoBehaviour {
 	string getPrevItem(){
 		string result = "";
 		
+		// Obtenemos el codigo asociado a cada item
 		switch (selectedItem) {
 		case 0:
 			result = "GreenDroidButton";
@@ -38,6 +42,9 @@ public class purchaseSkin : MonoBehaviour {
 		return result;
 	}
 
+	// Al hacer click en el boton si se cumplen las condiciones se compra el objeto
+	// y se vuelve a cargar la escena con el objeto seleccionado.
+	// Se desbloquean logros por realizar la compra.
 	public void onClick(){
 		gems = PlayerPrefs.GetInt ("gems");
 

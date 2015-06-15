@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+// Script controlador de la escena del gameplay
 public class UniverseScript : MonoBehaviour {
 	GameObject Bar;
 	GameObject RetryButton, MenuButton;
@@ -15,9 +16,9 @@ public class UniverseScript : MonoBehaviour {
 	public int gems;
 	private static UniverseScript _instance;
 
+	// Al inciar
 	void Awake(){
-		//PlayerPrefs.DeleteAll ();
-		//PlayerPrefs.SetInt ("gems", 100);
+		// Paramos todos los audios que esten sonando excepto la musica de fondo de esta escena
 		AudioSource[] allAudioSources = (AudioSource[])FindObjectsOfType(typeof(AudioSource));
 		for (int i = 0; i < allAudioSources.Length; i++) {
 			if(allAudioSources[i].name != "bg_music")
@@ -32,9 +33,11 @@ public class UniverseScript : MonoBehaviour {
 		else{
 			Destroy(this.gameObject);
 		}
+		
+		// No destruimos este objeto ni los que haga falta tener en memoria al reiniciar
 		DontDestroyOnLoad(this.gameObject);
 		
-		// Inicialization
+		// Inicializacion
 		GemsUI = GameObject.Find("GemsUI");
 		RetryButton = GameObject.Find ("RetryButton");
 		MenuButton = GameObject.Find ("MenuButton");
@@ -67,10 +70,6 @@ public class UniverseScript : MonoBehaviour {
 		if (! bg_music.GetComponent<AudioSource> ().isPlaying && FMG.Constants.getAudioVolume()==1) {
 			bg_music.GetComponent<AudioSource> ().Play();
 		}
-	}
-
-	// Use this for initialization
-	void Start () {
 	}
 	
 	// Update is called once per frame

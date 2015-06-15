@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Script para mover al personaje entre portales
 public class tragabicho : MonoBehaviour {
 
 	GameObject Player;
@@ -23,36 +24,41 @@ public class tragabicho : MonoBehaviour {
 		BlackHoleDestBad.GetComponentInChildren<ParticleSystem> ().Stop ();
 	}
 
+	// Cuando colisiona el portal con el jugador ponemos la gravedad a 0 y velocidad a 0
 	void OnTriggerEnter2D(Collider2D collider){
 		timer = 0.0f;
 		Player.GetComponent<Rigidbody2D> ().gravityScale = 0;
 		Player.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
 		contact = true;
 	}
-
+	// Cuando abandonamos el portal ponemos la gravedad a 0
 	void OnTriggerExit2D(Collider2D collider){
 		Player.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
 	}
 	
 	void Update(){
+		// Esperamos a que pase un segundo para iniciar la teleportacion
 		timer += Time.deltaTime;
 		if (contact && timer > 1) {
+			// Para teleportarnos ocultamos el personaje y mostramos un efecto de particulas
 			Player.GetComponent<Rigidbody2D>().isKinematic = true;
 			Player.transform.localScale = new Vector3(0,0,0);
 			fire.GetComponent<ParticleSystem> ().Stop ();
 			BallTransformation.GetComponent<ParticleSystem>().Play();
 			sound_Jetpack.GetComponent<AudioSource>().Stop();
 
+			// En caso de ser un portal verde (bueno)
 			if (this.name == "BlackHoleGood") {
-				// Face to target
+				// Apuntamos al objetivo
 				Vector3 dir = BlackHoleDestGood.transform.position - Player.transform.position;
 				float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
 				Player.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
+				
+				// Movemos al jugador hasta el objetivo
 				Player.transform.Translate(Vector3.right * Time.deltaTime*5);
 				BlackHoleDestGood.GetComponentInChildren<ParticleSystem> ().Play ();
 
-
+				// Cuando llegamos deshacemos todas las transformaciones
 				if(Player.transform.position.x >= BlackHoleDestGood.transform.position.x){
 					Player.GetComponent<Rigidbody2D>().isKinematic = false;
 					Player.GetComponent<Rigidbody2D>().gravityScale = 1;
@@ -65,9 +71,9 @@ public class tragabicho : MonoBehaviour {
 					timer = 0.0f;
 				}
 			}
-
+			// Lo mismo que en el caso anterior, pero ahora nos movemos hacia atras
 			else if (this.name == "BlackHoleBad") {
-				// Face to target
+			
 				Vector3 dir = Player.transform.position -  BlackHoleDestBad.transform.position;
 				float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
 				Player.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

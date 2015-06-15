@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Esta clase controla el desplazador del escenario ("Looper")
 public class BGLooper : MonoBehaviour {
 	
 	int numBGPanels = 4;
@@ -17,11 +18,13 @@ public class BGLooper : MonoBehaviour {
 
 	private GameObject previousPlatform;
 
-	
+	// Evento que se activa al colisionar con el objeto collider
 	void OnTriggerEnter2D(Collider2D collider){
 		
 		Vector3 pos = collider.transform.position;
 		float widthOfBGObject = 0;
+		
+		// Si chocamos contra una plataforma la desplazamos en X e Y de forma aleatoria pero controlada.
 		if (collider.tag == "Platform") {
 			// Mover plataforma en con eje Y aleatorio
 			widthOfBGObject = ((BoxCollider2D)collider).size.x*1.6f;
@@ -72,7 +75,8 @@ public class BGLooper : MonoBehaviour {
 			else if (hasBlackHole == 1 && (collider.name=="platform10")){
 				collider.transform.GetChild(3).gameObject.SetActive(true);
 			}
-			
+		
+		// Si chocamos contra las imagenes de fondo se desplazan hacia adelante
 		} else if (collider.tag == "Background"){
 			widthOfBGObject = ((BoxCollider2D)collider).size.x*1.655f;
 			pos.x += (widthOfBGObject * numBGPanels);

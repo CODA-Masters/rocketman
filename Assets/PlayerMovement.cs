@@ -4,6 +4,12 @@ using UnityEngine.UI;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
 
+/*
+Script principal de accion del juego.
+Se implementa el control del personaje y
+elementos graficos en la pantalla de juego.
+*/
+
 namespace ProgressBar{
 
 public class PlayerMovement : MonoBehaviour {
@@ -76,14 +82,15 @@ public class PlayerMovement : MonoBehaviour {
 		timeCounter = 0;
 		
 	}
-
+	// Funcion de movimiento
 	void Movement(){
-		if(Input.GetMouseButton(0)){ // left click pressed
-			buttonPressTime += Time.deltaTime; // calculate time pressed
-			if(buttonPressTime >= jumpTop){
+		// Si pulsamos la pantalla
+		if(Input.GetMouseButton(0)){ 
+			buttonPressTime += Time.deltaTime; // Tiempo de boton presionado acumulado
+			if(buttonPressTime >= jumpTop){ // Capamos la potencia maxima que se puede alcanzar
 				buttonPressTime = jumpTop;
 			}
-			
+			// Cargamos la barra de potencia si la fase actual es la de salto
 			if(phase == JUMP_MODE){
 				percent = buttonPressTime / jumpTop;
 				Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(percent);
@@ -92,7 +99,8 @@ public class PlayerMovement : MonoBehaviour {
 				}
 				
 			}
-			
+			// Movemos la flecha en direccion que marca nuestro dedo si la fase es angulo
+			// Capamos los angulos minimo y maximo para no permitir saltos indeseados.
 			if(phase == ANGLE_MODE){
 				Vector2 v = Input.mousePosition - Arrow.transform.position;
 				if(angle <= 100 && angle >= 5 && !topAngleReached){
@@ -112,24 +120,26 @@ public class PlayerMovement : MonoBehaviour {
 						topAngleReached = false;
 					}
 				}
+				// Movemos el grafico de la flecha al mismo tiempo
 				Arrow.transform.localRotation = Quaternion.Euler (0, 0, angle);
 			}
 			
 		}
-		if(Input.GetMouseButtonUp(0)){ // left click released
+		// Soltamos el dedo
+		if(Input.GetMouseButtonUp(0)){ 
 			
 			timeCounter = 0;
 			topAngleReached = false;
 			
 			if(!startJumping){
-				// Angle phase ends
+				// Termina la fase de angulo
 				if(phase == ANGLE_MODE){
 					Bar.GetComponent<ProgressRadialBehaviour>().SetFillerSize(0);
 					angle = Arrow.transform.eulerAngles.z * Mathf.Deg2Rad;
 					buttonPressTime = 0;
 				}
 				
-				//Jump speed phase ends
+				//Termina la fase de salto
 				if(phase == JUMP_MODE){
 					startJumping = true;
 					Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
@@ -138,7 +148,7 @@ public class PlayerMovement : MonoBehaviour {
 					
 				}
 				
-				
+				// Alternamos entre una fase y otra
 				if(phase == ANGLE_MODE){ phase = JUMP_MODE; }
 				else{ phase = ANGLE_MODE; }
 			}
@@ -147,6 +157,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Graficos y movimiento
 	void Update(){
+		// Seleccionamos la animacion correspondiente a la skin seleccionada
 		if (!isJumping) {
 			Movement ();
 			switch (PlayerPrefs.GetInt ("selectedItem")) {
@@ -190,7 +201,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Calculos fisicos
 	void FixedUpdate(){
 		
-		// if DIE
+		// Si el personaje muere actualizamos el ranking y mostramos las opciones de reintentar y menu
 		if (transform.position.y < (Background.transform.position.y - bc.size.y)) {
 			if (!dead) {
 				Time.timeScale = 0;
@@ -214,6 +225,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			dead = true;
 		}
+		// Si se encuentra quieto paramos la velocidad. Si empieza a saltar aplicamos una fuerza con su angulo calculado
 		if (!isJumping) {
 			if (startJumping) {
 				rb.velocity = new Vector2 (Mathf.Cos (angle) * buttonPressTime * speed, Mathf.Sin (angle) * buttonPressTime * speed * 1.5f);
@@ -222,12 +234,14 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			
 		}
+		// La puntuacion se obtiene a partir de la distancia de la plataforma actual a la siguiente
 		int scorePrev = score;
 		score = (int)((transform.position.x - posInicial + 2) / platform.GetComponent<BoxCollider2D> ().bounds.size.x);
 		ScorePanel.GetComponentInChildren<Text> ().text = "" + score;
 		if (score > scorePrev && FMG.Constants.getAudioVolume()==1)
 			sound_Score.GetComponent<AudioSource> ().Play ();
 		
+		// Si obtenemos la puntuacion que requieren los logros de Google Play Services los desbloqueamos
 		if (score == 10) {
 			Social.ReportProgress ("CgkIh-a8y9sQEAIQCQ", 100.0f, (bool success) => {});
 		} else if (score == 25) {
@@ -239,6 +253,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
+	// Al entrar en contacto con una plataforma paramos el movimiento
 	void OnCollisionEnter2D(Collision2D collision){
 		Arc.GetComponent< Transform > ().localScale = new Vector3 (1, 1, 1);
 		isJumping = false;
@@ -247,6 +262,7 @@ public class PlayerMovement : MonoBehaviour {
 		rb.velocity = new Vector3 (0, 0, 0);
 	}
 
+	// Al salir volvemos a saltar
 	void OnCollisionExit2D(Collision2D collision){
 		Arc.GetComponent< Transform > ().localScale = new Vector3 (0, 0, 0);
 		isJumping = true;
