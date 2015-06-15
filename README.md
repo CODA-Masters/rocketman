@@ -23,3 +23,11 @@ https://play.google.com/store/apps/details?id=com.codamasters.rocketdroid
 ![captura1](https://lh3.googleusercontent.com/qodgYhgEIBK2bKKMSi3BoquCFml7BOoc6nhtJDPgpCZYLb5UBnD696aLWuJbNhdmljv0=h900-rw)
 
 ![captura2](https://lh3.googleusercontent.com/4OVhIiErq6xjICUY1HcTg3iC_SEPzjE7LUXYVZueQtc4ZCN998_oxwhNAVzejzrNyHM=h900-rw)
+
+## Compilación
+
+Para compilar el proyecto hay que
+
+* Instalar [Unity](https://unity3d.com/es/get-unity)
+* Importar proyecto
+* Ir a File --> Build Settings, seleccionar la plataforma de destino y click en Build
